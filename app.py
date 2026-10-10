@@ -2,7 +2,11 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-model = joblib.load("machine_failure_xgb.pkl")
+try:
+    model = joblib.load("machine_failure_xgb.pkl")
+except Exception as e:
+    st.error(f"Model loading failed: {e}")
+    st.stop()
 
 st.set_page_config(page_title="Machine Failure Predictor", page_icon="⚙️")
 st.title("⚙️ Machine Failure Prediction App")
